@@ -1,0 +1,78 @@
+{
+  "committees": [
+    {
+      "category": "Membership",
+      "members": [
+        { "name": "Shakil Sahibole", "role": "Lead" },
+        { "name": "Tahir Khanzadah", "role": "Dy. Lead" },
+        { "name": "Ismail Wangde", "role": "Member" },
+        { "name": "Imtiyaz Pasware", "role": "Member" },
+        { "name": "Parvez Wadekar", "role": "Member" },
+        { "name": "Labib Fakih", "role": "Member" }
+      ]
+    },
+    {
+      "category": "Media and Public Relations (Raabta)",
+      "members": [
+        { "name": "Aslam Thakur", "role": "Lead" },
+        { "name": "Sattar Surve", "role": "Dy. Lead" },
+        { "name": "Mushtaq Desai", "role": "Member" },
+        { "name": "Shakil Sahibole", "role": "Member" },
+        { "name": "Imtiyaz Pasware", "role": "Member" },
+        { "name": "Labib Fakih", "role": "Member" },
+        { "name": "Dilawar Dalwai", "role": "Member" }
+      ]
+    },
+    {
+      "category": "Information Technology",
+      "members": [
+        { "name": "Ismail Wangde", "role": "Lead" },
+        { "name": "Parvez Wadekar", "role": "Dy. Lead" },
+        { "name": "Tahir Khanzada", "role": "Member" },
+        { "name": "Sattar Surve", "role": "Member" },
+        { "name": "Labib Fakih", "role": "Member" }
+      ]
+    },
+    {
+      "category": "Strategic Projects",
+      "members": [
+        { "name": "Asghar Surguroh", "role": "Lead" },
+        { "name": "Sattar Surve", "role": "Dy. Lead" },
+        { "name": "Labib Fakih", "role": "Member" },
+        { "name": "Mushtaq Desai", "role": "Member" },
+        { "name": "Ismail Wangde", "role": "Member" },
+        { "name": "Parvez Wadekar", "role": "Member" },
+        { "name": "Imtiyaz Pasware", "role": "Member" },
+        { "name": "Tahir Khanzada", "role": "Member" },
+        { "name": "Faiz Rakhange", "role": "Member" },
+        { "name": "Waqar Pallawkar", "role": "Member" }
+      ]
+    },
+    {
+      "category": "Vendor Management",
+      "members": [
+        { "name": "Labib Fakih", "role": "Lead" },
+        { "name": "Dilawar Dalwai", "role": "Dy. Lead" },
+        { "name": "Imtiyaz Pasware", "role": "Member" },
+        { "name": "Abdul Ghani Deshmukh", "role": "Member" },
+        { "name": "Rafique Kundlik", "role": "Member" },
+        { "name": "Faiz Rakhange", "role": "Member" },
+        { "name": "Nabeel Mullaji", "role": "Member" },
+        { "name": "Rizwan Sange", "role": "Member" },
+        { "name": "Rahmatullah Galsulker", "role": "Member" },
+        { "name": "Mohammed Shafi Alware", "role": "Member" },
+        { "name": "Mushtaq Desai", "role": "Member" },
+        { "name": "Asif Chougule", "role": "Member" },
+        { "name": "Waqar Pallawkar", "role": "Member" },
+        { "name": "Salim Talib", "role": "Member" }
+      ]
+    },
+    {
+      "category": "Sharia",
+      "members": [
+        { "name": "Mufti Hamza Muzawar", "role": "Lead" },
+        { "name": "Shakil Sahibole", "role": "Dy. Lead" }
+      ]
+    }
+  ]
+}
