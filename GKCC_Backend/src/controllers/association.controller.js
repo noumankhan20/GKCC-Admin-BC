@@ -497,7 +497,7 @@ const getAllAssociationNames = asyncHandler(async (req, res) => {
   try {
     const allAssociationNames = await Association.find(
       {},
-      { associationName: 1 }
+      { associationName: 1, GKCCId: 1, _id: 0 }
     );
 
     return res

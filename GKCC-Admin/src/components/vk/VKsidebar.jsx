@@ -4,28 +4,22 @@ import { FaUser, FaUsers, FaFileInvoice, FaRegCalendarAlt, FaSignOutAlt } from '
 import { useRouter } from 'next/navigation'; 
 import axios from 'axios';
 
-const SASidebar = () => {
+const VKSidebar = () => {
   const router = useRouter(); 
 
   const handleLogoClick = () => {
-    router.push('/landingSA'); // Update this to the correct landing page
+    router.push('/landingVK'); // Update this to the correct landing page
   };
 
   const handleMemberListClick = () => {
-    router.push('/SAmembers'); 
+    router.push('/VKmembers'); 
   };  
 
   const handleVendorsClick = () => {
-    router.push('/vendors'); 
+    router.push('/VK-vendors'); 
   };  
 
-  const handleAssociationClick = () => {
-    router.push('/Association'); 
-  };
-
-  const handleAssociationListClick = () => {
-    router.push('/AssociationList'); 
-  };
+ 
 
   const handleLogoutClick = async () => {
     try {
@@ -50,10 +44,7 @@ const SASidebar = () => {
         />
       </div>
       
-      <div className="flex items-center mt-8 mb-6 cursor-pointer backdrop-blur-md bg-white text-black  p-3 rounded hover:bg-blue-800 transition" onClick={handleAssociationClick}> 
-        <FaUser className="text-2xl" />
-        <span className="ml-4 sm:ml-8">Associate Admin</span>
-      </div>
+      
       
       <div className="flex items-center mb-6 cursor-pointer backdrop-blur-md bg-white text-black p-3 rounded hover:bg-blue-800 transition" onClick={handleMemberListClick}> 
         <FaUsers className="text-2xl" />
@@ -75,11 +66,6 @@ const SASidebar = () => {
         <span className="ml-4 sm:ml-8">Events</span>
       </div>
 
-      <div className="flex items-center mb-6 cursor-pointer backdrop-blur-md bg-white text-black p-3 rounded hover:bg-blue-800 transition" onClick={handleAssociationListClick}> 
-        <FaRegCalendarAlt className="text-2xl" />
-        <span className="ml-4 sm:ml-8">Nouman</span>
-      </div>
-
       {/* Logout Button */}
       <div className="flex items-center mb-6 cursor-pointer backdrop-blur-md bg-white text-black p-3 rounded hover:bg-red-600 transition" onClick={handleLogoutClick}> 
         <FaSignOutAlt className="text-2xl" />
@@ -89,4 +75,4 @@ const SASidebar = () => {
   );
 };
 
-export default SASidebar;
+export default VKSidebar;
