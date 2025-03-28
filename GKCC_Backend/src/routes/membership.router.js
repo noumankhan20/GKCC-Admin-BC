@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createMembership, loginMembership, getMemberDetail, updateMemberDetails, totalMember, totalPendingMember, associationPendingMemberCount, associationTotalMemberCount} from '../controllers/membership.controller.js';
+import { createMembership, loginMembership, getMemberDetail, updateMemberDetails, totalMember, totalPendingMember, associationPendingMemberCount, associationTotalMemberCount, getTotalMembersInAssociation, getTotalMembersInAssociationByGKCCId, getMembersByAssociationName} from '../controllers/membership.controller.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { authMiddleware } from '../middlewares/auth.middleware.js';
 import { adminAuthMiddleware } from '../middlewares/adminauth.middleware.js';
@@ -33,5 +33,12 @@ router.route("/getmembercount").get(totalMember)
 router.route("/getpendingmembercount").get(totalPendingMember)
 router.route("/thisAssociationPendingCount").get(adminAuthMiddleware,associationPendingMemberCount)
 router.route("/thisAssociationTotalCount").get(adminAuthMiddleware,associationTotalMemberCount)
+
+
+router.route("/totalMembers/:associationName").get(getTotalMembersInAssociation); //
+
+router.route("/totalMember/:GKCCId").get(getTotalMembersInAssociationByGKCCId);
+
+router.get("/memberships/:associationName", getMembersByAssociationName);
 
 export default router;

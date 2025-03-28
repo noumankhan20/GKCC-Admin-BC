@@ -13,6 +13,8 @@ import {
   getOneAssociationDetails,
   uploadMembershipBulks,
   totalAssociationNumber,
+  getAcceptedAllAssociations,
+  getAssociationByGKCCId
 } from "../controllers/association.controller.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
@@ -83,5 +85,8 @@ router.route("/getAllAssociationNames").get(getAllAssociationNames)
 // get Count
 router.route("/getAssociationcount").get(totalAssociationNumber)
 
+router.route("/getAcceptedAllAssociation").get(getAcceptedAllAssociations);// to get all accepted association details
+
+router.route("/getAssociationByGKCCId/:GKCCId").get(getAssociationByGKCCId);
 
 export default router;

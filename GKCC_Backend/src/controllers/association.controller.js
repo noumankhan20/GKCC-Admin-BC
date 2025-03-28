@@ -462,7 +462,7 @@ const rejectAssociation = asyncHandler(async (req, res) => {
 //getallascoaition
 const getAllAssociations = asyncHandler(async (req, res, next) => {
   try {
-    const allAssociations = await Association.find({}); // Fetch all associations without any status filter
+    const allAssociations = await Association.find({status: "accepted"}); // Fetch all associations without any status filter
 
     // Update file paths with environment variable
     const updatedAssociations = allAssociations.map((assoc) => ({
@@ -490,7 +490,31 @@ const getAllAssociations = asyncHandler(async (req, res, next) => {
   } catch (error) {
     throw new ApiError(500, "Error retrieving all associations", error.message);
   }
-});
+})
+
+
+// const getAllAssociations = asyncHandler(async (req, res, next) => {
+//   try {
+//     // Fetch only associations with status "accepted" and project only the desired fields.
+//     const acceptedAssociations = await Association.find(
+//       { status: "accepted" },
+//       { GKCCId: 1, associationName: 1, country: 1, _id: 0 } // exclude _id if you don't want it
+//     );
+
+//     return res
+//       .status(200)
+//       .json(
+//         new ApiResponse(
+//           200,
+//           acceptedAssociations,
+//           "Accepted associations retrieved successfully"
+//         )
+//       );
+//   } catch (error) {
+//     throw new ApiError(500, "Error retrieving associations", error.message);
+//   }
+// });
+
 
 // This Function is used to get All the Association Names List
 const getAllAssociationNames = asyncHandler(async (req, res) => {
@@ -499,6 +523,7 @@ const getAllAssociationNames = asyncHandler(async (req, res) => {
       {},
       { associationName: 1, GKCCId: 1, _id: 0 }
     );
+    
 
     return res
       .status(200)
@@ -804,6 +829,68 @@ const totalAssociationNumber = asyncHandler(async (req, res) => {
   }
 });
 
+//created by vivek to fetch details of each accepted association
+const getAcceptedAllAssociations = asyncHandler(async (req, res) => {
+  try {
+    // Fetch associations where the status is "accepted"
+    const acceptedAssociations = await Association.find(
+      { status: "accepted" },
+      { associationName: 1, GKCCId: 1, country: 1, numberOfMembers: 1, _id: 1 }
+    );
+
+    return res.status(200).json({
+      data: acceptedAssociations,
+      message: "Accepted associations retrieved successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error retrieving accepted associations",
+      error: error.message,
+    });
+  }
+});
+
+// In association.controller.js
+
+const getAssociationByGKCCId = asyncHandler(async (req, res) => {
+  const { GKCCId } = req.params;
+
+  try {
+    const association = await Association.findOne({ GKCCId: GKCCId });
+
+    if (!association) {
+      return res.status(404).json({
+        message: "Association not found",
+      });
+    }
+
+    // Update file paths with the environment variable
+    const updatedAssociation = {
+      ...association._doc,
+      associationLogo: association.associationLogo
+        ? `${process.env.WEB_URL}${association.associationLogo}`
+        : "",
+      president: {
+        ...association.president,
+        signature: association.president.signature
+          ? `${process.env.WEB_URL}${association.president.signature}`
+          : "",
+      },
+    };
+
+    return res.status(200).json({
+      data: updatedAssociation,
+      message: "Association details fetched successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error retrieving association details",
+      error: error.message,
+    });
+  }
+});
+
+
 export {
   createAssociation,
   test,
@@ -817,5 +904,7 @@ export {
   getOneAssociationDetails,
   uploadMembershipBulks,
   totalAssociationNumber,
-  getAcceptedAssociationNames
+  getAcceptedAssociationNames,
+  getAcceptedAllAssociations,
+  getAssociationByGKCCId
 };

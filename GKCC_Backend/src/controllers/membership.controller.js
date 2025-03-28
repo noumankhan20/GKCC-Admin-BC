@@ -449,6 +449,110 @@ const associationTotalMemberCount = asyncHandler(async (req, res) => {
   }
 });
 
+//created by vivek to fetch to total number of memeber in a association
+const getTotalMembersInAssociation = asyncHandler(async (req, res) => {
+  try {
+    const { associationName } = req.params;
+
+    // Count the number of members in the given association
+    const totalMembers = await Membership.countDocuments({ association: associationName });
+
+    // Respond with the total member count
+    return res.status(200).json(
+      new ApiResponse(200, { totalMembers }, "Total members in association fetched successfully")
+    );
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error fetching total members in association",
+      error: error.message,
+    });
+  }
+});
+
+// Controller to fetch the total number of members in a particular association based on GKCCId
+const getTotalMembersInAssociationByGKCCId = asyncHandler(async (req, res) => {
+  const { GKCCId } = req.params;
+
+  // Check if GKCCId is provided
+  if (!GKCCId) {
+    return res.status(400).json({ message: "GKCCId is required" });
+  }
+
+  // Debugging: Log the received GKCCId
+  console.log("Received GKCCId:", GKCCId);
+
+  try {
+    // Ensure GKCCId is treated as a string
+    const totalMembers = await Membership.countDocuments({ GKCCId: String(GKCCId) });
+
+    // Respond with the total member count
+    if (totalMembers === 0) {
+      return res.status(404).json({ message: "No members found for the given GKCCId" });
+    }
+
+    return res.status(200).json({
+      data: { totalMembers },
+      message: "Total members in association fetched successfully",
+    });
+  } catch (error) {
+    console.error("Error fetching total members:", error);
+    return res.status(500).json({
+      message: "Error fetching total members in association by GKCCId",
+      error: error.message,
+    });
+  }
+});
+
+const getAllMemberships = asyncHandler(async (req, res) => {
+  try {
+    // Fetch all membership records
+    const memberships = await Membership.find();
+
+    // Check if any memberships are found
+    if (memberships.length === 0) {
+      return res.status(404).json({ message: "No memberships found" });
+    }
+
+    // Return the list of memberships
+    return res.status(200).json({
+      data: memberships,
+      message: "All memberships fetched successfully",
+    });
+  } catch (error) {
+    console.error("Error fetching memberships:", error);
+    return res.status(500).json({
+      message: "Error fetching all memberships",
+      error: error.message,
+    });
+  }
+});
+
+const getMembersByAssociationName = async (req, res) => {
+  try {
+    const associationName = req.params.associationName;
+
+    // Fetch all members where the associationName matches
+    const members = await Membership.find({ association: associationName });
+
+    if (!members || members.length === 0) {
+      return res.status(404).json({
+        message: "No members found for this association.",
+      });
+    }
+
+    return res.status(200).json({
+      data: members,
+      message: "Membership details fetched successfully",
+    });
+  } catch (error) {
+    console.error("Error fetching members:", error);
+    return res.status(500).json({
+      message: "Failed to fetch membership details",
+      error: error.message,
+    });
+  }
+};
+
 export {
   createMembership,
   loginMembership,
@@ -458,4 +562,8 @@ export {
   totalPendingMember,
   associationPendingMemberCount,
   associationTotalMemberCount,
+  getTotalMembersInAssociation,
+  getTotalMembersInAssociationByGKCCId,
+  getAllMemberships,
+  getMembersByAssociationName
 };

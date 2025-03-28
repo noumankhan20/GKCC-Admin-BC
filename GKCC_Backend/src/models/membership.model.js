@@ -97,4 +97,7 @@ membershipSchema.pre("save", async function (next) {
 // Create the membership model
 const Membership = mongoose.model("Membership", membershipSchema);
 
+
+
+
 export default Membership;
